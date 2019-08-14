@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { format, parseISO } from 'date-fns';
 
@@ -8,23 +8,7 @@ import { Container, Nav, Cidade, Header, Clima, Temperatura } from './styles';
 const token = 'd3a68dc4d7cf177f7d14903951d3c263';
 
 export default function Home() {
-  const [cidade, setCidade] = useState({
-    id: 3477,
-    name: 'São Paulo',
-    state: 'SP',
-    country: 'BR',
-    data: {
-      temperature: 23.8,
-      wind_direction: 'NW',
-      wind_velocity: 22,
-      humidity: 43,
-      condition: 'Poucas nuvens',
-      pressure: 1008,
-      icon: '2',
-      sensation: 27,
-      date: '2017-10-01 12:37:00',
-    },
-  });
+  const [cidade, setCidade] = useState();
 
   const dateFormatted = useMemo(
     () => (cidade ? format(parseISO(cidade.data.date), 'dd/MM/yyyy') : null),
@@ -44,8 +28,6 @@ export default function Home() {
 
     getClimaCidade(id);
   }
-
-  useEffect(() => {}, []);
 
   async function handleSubmit({ cidade }) {
     getCidade(cidade);
