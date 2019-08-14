@@ -31,20 +31,18 @@ export default function Home() {
     [cidade]
   );
 
-  async function getClima(id) {
-    const response = await api.get(
-      `/weather/locale/${id}/current?token=${token}`
-    );
+  async function getClimaCidade(id) {
+    const response = await api.get(`/clima/${id}/${token}`);
+
     setCidade(response.data);
   }
 
   async function getCidade(cidade) {
-    const response = await api.get(
-      `/locale/city?name=${cidade}&token=${token}`
-    );
+    const response = await api.get(`/cidade/${cidade}/${token}`);
 
-    const { id } = response.data[0];
-    getClima(id);
+    const { id } = response.data;
+
+    getClimaCidade(id);
   }
 
   useEffect(() => {}, []);
